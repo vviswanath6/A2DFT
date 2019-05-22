@@ -104,7 +104,7 @@ def MakeMask(input):
     StdDeviation = np.std(data)
     print(StdDeviation)
     threshold = StdDeviation   #10
-    neighborhood_size = (1, 70)
+    neighborhood_size = (1, WindowLengthAlongRateAxis)
     data_max = filters.maximum_filter(data, neighborhood_size)
     maxima = (data)
     data_min = filters.minimum_filter(data, neighborhood_size)
@@ -117,6 +117,7 @@ FftSize = 1024           #1024, 2048, 4096, 8192, 16384, 32768
 SampleRateinHz = 44100
 input1 = GetAudio("mixture1.wav", expectedFs=44100)
 hopsamp = FftSize // 8
+WindowLengthAlongRateAxis = 70
 
 StftFull = SpectrogramByStft(input1,FftSize, hopsamp)
 StftMagnitude = 20*np.log(np.abs(StftFull))
